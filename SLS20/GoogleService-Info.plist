@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>827214943995-ss7fjk9rald1r9r6ac90dln8isrdm3sk.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.827214943995-ss7fjk9rald1r9r6ac90dln8isrdm3sk</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAiCsiLnCDotsKsvrQTdacJhtANMLOPVvs</string>
+	<key>GCM_SENDER_ID</key>
+	<string>827214943995</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>Justin-Kalan.SLS20</string>
+	<key>PROJECT_ID</key>
+	<string>sls-signup</string>
+	<key>STORAGE_BUCKET</key>
+	<string>sls-signup.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:827214943995:ios:7b3d363fbb4cdfd51c425e</string>
+	<key>DATABASE_URL</key>
+	<string>https://sls-signup.firebaseio.com</string>
+</dict>
+</plist>

@@ -1,0 +1,6 @@
+framework module Pods_SLS20Tests {
+  umbrella header "Pods-SLS20Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
