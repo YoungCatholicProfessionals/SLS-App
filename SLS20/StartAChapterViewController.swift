@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class StartAChapterViewController: UIViewController{
-    let user: User! = nil
+    let user: User = User(nm:"", em:"")
     
     @IBOutlet weak var cityTextField: UITextField!
     
@@ -20,6 +20,8 @@ class StartAChapterViewController: UIViewController{
     
     @IBOutlet weak var phoneNumberTextField: UITextField!
     
+    @IBOutlet weak var warningField: UILabel!
+    
     @IBOutlet weak var personTypePicker: UIPickerView!
     var pickerOptions:[String] = ["Young Catholic Professional (20-39)", "Seasonsed Catholic", "Diocesan/Church Employee"]
     
@@ -28,27 +30,43 @@ class StartAChapterViewController: UIViewController{
     }
     
     @IBAction func submitTapped(_ sender: Any) {
-        if(cityTextField.hasText){
-            user?.age =  ageTextField.text!
-            user?.potentialCity = cityTextField.text
-            user?.type = "Young Catholic Professional"
-            user?.name = User.sharedUser.name
-            user?.email = User.sharedUser.email
-            user?.phoneNumber = phoneNumberTextField.text
-            
-            writeToDatabase()
+        if(notFilledOut()){
+            warningField.isHidden = false
         }
-        performSegue(withIdentifier: "toHome", sender: self)
+        else{
+            user.age =  ageTextField.text ?? "no age"
+            user.potentialCity = cityTextField.text ?? " no city"
+            user.name = User.sharedUser.name ?? " no name"
+            user.email = User.sharedUser.email ?? " no email"
+            user.phoneNumber = phoneNumberTextField.text ?? " no phone"
+            print(user.age, user.email, user.name, user.phoneNumber)
+            writeToDatabase()
+            performSegue(withIdentifier: "toHome", sender: self)
+        }
+    }
+    /*
+     * checks whether or not the text fields are filled out
+     * called once the submit button is tapped. True means fields
+     * need to be filled out
+     */
+    func notFilledOut() -> Bool{
+        if(ageTextField.text == "" || cityTextField.text == "" || phoneNumberTextField.text == "" || genderTextField.text == ""){
+            return true
+        }
+        return false
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        personTypePicker.delegate = self
+        personTypePicker.dataSource = self
     }
     
     func writeToDatabase(){
         let ref = Database.database().reference()
-        var newDict: [String:Any] = ["email": user?.email, "name": user?.name, "city": user?.potentialCity,
-                                     "age": user?.age, "type": user?.type, "phone":user?.phoneNumber, "interest": "start a chapter"]
-        ref.child("people").setValue(newDict)
+        let newDict: [String:String] = ["email": (user.email)!, "name": (user.name)!, "city": (user.potentialCity)!,
+                                        "age": (user.age)!, "type": (user.type)!, "phone":(user.phoneNumber)!, "interest": "start a chapter"]
+        print(user.name, user.type)
+        ref.child("people").child((user.name)!).setValue(newDict)
     }
 }
 
@@ -63,5 +81,13 @@ extension StartAChapterViewController: UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return pickerOptions.count
+    }
+}
+
+extension StartAChapterViewController: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        user.type = pickerOptions[row]
+        print(pickerOptions[row])
+        print(user.name, user.type)
     }
 }

@@ -16,18 +16,48 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var warningLabel: UILabel!
+    
+    var recognizer: UITapGestureRecognizer?
     
     override func viewDidLoad() {
-        ref = Database.database().reference()
         super.viewDidLoad()
+        ref = Database.database().reference()
         signInAnonymously()
+        emailTextField.delegate = self
+        nameTextField.delegate = self
+    }
+    
+    @objc func handleTap(){
+        emailTextField.resignFirstResponder()
+        nameTextField.resignFirstResponder()
     }
     
     @IBAction func startAChapterButton(_ sender: Any) {
+        if(notFilledOut()){
+            warningLabel.isHidden = false
+        }
+        else{
+            goToNextScreen()
+        }
+    }
+    
+    func goToNextScreen(){
         User.sharedUser = User(nm: nameTextField.text, em: emailTextField.text)
         performSegue(withIdentifier: "toStartAChapter", sender: self)
     }
     
+    /*
+     * checks whether or not the text fields are filled out
+     * called once the submit button is tapped. True means fields
+     * need to be filled out
+     */
+    func notFilledOut() -> Bool{
+        if(nameTextField.text == "" || emailTextField.text == ""){
+            return true
+        }
+        return false
+    }
     
     
     @IBAction func joinAChapterButton(_ sender: Any) {
@@ -52,5 +82,28 @@ class ViewController: UIViewController {
     }
 
 
+}
+
+extension ViewController: UITextFieldDelegate{
+    /* validate email field */
+    private func textFieldShouldEndEditing(_ textField: UITextField) {
+        if(!(emailTextField.text?.contains("@"))!){
+            warningLabel.text = "Enter a valid Email"
+            warningLabel.isHidden = false
+        }
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if(emailTextField.isFirstResponder){
+            print("going to next screen")
+            goToNextScreen()
+            return true
+        }
+        else{
+            print("changing text fields")
+            nameTextField.resignFirstResponder()
+            emailTextField.becomeFirstResponder()
+            return true
+        }
+    }
 }
 
