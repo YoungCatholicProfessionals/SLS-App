@@ -26,6 +26,8 @@ class ViewController: UIViewController {
         signInAnonymously()
         emailTextField.delegate = self
         nameTextField.delegate = self
+        recognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.handleTap))
+        view.addGestureRecognizer(recognizer!)
     }
     
     @objc func handleTap(){

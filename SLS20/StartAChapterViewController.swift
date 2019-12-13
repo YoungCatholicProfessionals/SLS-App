@@ -23,6 +23,9 @@ class StartAChapterViewController: UIViewController{
     @IBOutlet weak var warningField: UILabel!
     
     @IBOutlet weak var personTypePicker: UIPickerView!
+    
+    var recognizer: UITapGestureRecognizer?
+    
     var pickerOptions:[String] = ["Young Catholic Professional (20-39)", "Seasonsed Catholic", "Diocesan/Church Employee"]
     
     @IBAction func backButton(_ sender: Any) {
@@ -59,6 +62,15 @@ class StartAChapterViewController: UIViewController{
         super.viewDidLoad()
         personTypePicker.delegate = self
         personTypePicker.dataSource = self
+        recognizer = UITapGestureRecognizer(target: self, action: #selector(StartAChapterViewController.handleTap))
+        view.addGestureRecognizer(recognizer!)
+    }
+    
+    @objc func handleTap(){
+        cityTextField.resignFirstResponder()
+        ageTextField.resignFirstResponder()
+        phoneNumberTextField.resignFirstResponder()
+        genderTextField.resignFirstResponder()
     }
     
     func writeToDatabase(){
@@ -89,5 +101,23 @@ extension StartAChapterViewController: UIPickerViewDelegate {
         user.type = pickerOptions[row]
         print(pickerOptions[row])
         print(user.name, user.type)
+    }
+}
+
+extension StartAChapterViewController: UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if(phoneNumberTextField.isFirstResponder){
+            phoneNumberTextField.resignFirstResponder()
+        }
+        if(genderTextField.isFirstResponder){
+            genderTextField.resignFirstResponder()
+        }
+        if(ageTextField.isFirstResponder){
+            ageTextField.resignFirstResponder()
+        }
+        if(cityTextField.isFirstResponder){
+            cityTextField.resignFirstResponder()
+        }
+        return true
     }
 }
