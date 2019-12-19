@@ -13,9 +13,7 @@ class StartAChapterViewController: UIViewController{
     let user: User = User(nm:"", em:"")
     
     @IBOutlet weak var cityTextField: UITextField!
-    
-    @IBOutlet weak var genderTextField: UITextField!
-    
+        
     @IBOutlet weak var ageTextField: UITextField!
     
     @IBOutlet weak var phoneNumberTextField: UITextField!
@@ -26,7 +24,7 @@ class StartAChapterViewController: UIViewController{
     
     var recognizer: UITapGestureRecognizer?
     
-    var pickerOptions:[String] = ["Young Catholic Professional (20-39)", "Seasonsed Catholic", "Diocesan/Church Employee"]
+    var pickerOptions:[String] = ["Select one","Young Catholic Professional (20-39)", "Seasonsed Catholic", "Diocesan/Church Employee"]
     
     @IBAction func backButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -41,7 +39,7 @@ class StartAChapterViewController: UIViewController{
             user.potentialCity = cityTextField.text ?? " no city"
             user.name = User.sharedUser.name ?? " no name"
             user.email = User.sharedUser.email ?? " no email"
-            user.phoneNumber = phoneNumberTextField.text ?? " no phone"
+            user.phoneNumber = phoneNumberTextField.text ?? ""
             print(user.age, user.email, user.name, user.phoneNumber)
             writeToDatabase()
             performSegue(withIdentifier: "toHome", sender: self)
@@ -53,13 +51,15 @@ class StartAChapterViewController: UIViewController{
      * need to be filled out
      */
     func notFilledOut() -> Bool{
-        if(ageTextField.text == "" || cityTextField.text == "" || phoneNumberTextField.text == "" || genderTextField.text == ""){
+        if(ageTextField.text == "" || cityTextField.text == "" /*|| phoneNumberTextField.text == ""*/){
             return true
         }
         return false
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        // set this now in case they don't make a pick
+        user.type = "Young Catholic Professional (20-39)"
         personTypePicker.delegate = self
         personTypePicker.dataSource = self
         recognizer = UITapGestureRecognizer(target: self, action: #selector(StartAChapterViewController.handleTap))
@@ -70,11 +70,11 @@ class StartAChapterViewController: UIViewController{
         cityTextField.resignFirstResponder()
         ageTextField.resignFirstResponder()
         phoneNumberTextField.resignFirstResponder()
-        genderTextField.resignFirstResponder()
     }
     
     func writeToDatabase(){
         let ref = Database.database().reference()
+        print(user)
         let newDict: [String:String] = ["email": (user.email)!, "name": (user.name)!, "city": (user.potentialCity)!,
                                         "age": (user.age)!, "type": (user.type)!, "phone":(user.phoneNumber)!, "interest": "start a chapter"]
         print(user.name, user.type)
@@ -108,9 +108,6 @@ extension StartAChapterViewController: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if(phoneNumberTextField.isFirstResponder){
             phoneNumberTextField.resignFirstResponder()
-        }
-        if(genderTextField.isFirstResponder){
-            genderTextField.resignFirstResponder()
         }
         if(ageTextField.isFirstResponder){
             ageTextField.resignFirstResponder()

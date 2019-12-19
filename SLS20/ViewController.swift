@@ -40,13 +40,13 @@ class ViewController: UIViewController {
             warningLabel.isHidden = false
         }
         else{
-            goToNextScreen()
+            goToNextScreen(segueName: "toStartAChapter")
         }
     }
     
-    func goToNextScreen(){
+    func goToNextScreen(segueName: String){
         User.sharedUser = User(nm: nameTextField.text, em: emailTextField.text)
-        performSegue(withIdentifier: "toStartAChapter", sender: self)
+        performSegue(withIdentifier: segueName, sender: self)
     }
     
     /*
@@ -63,12 +63,30 @@ class ViewController: UIViewController {
     
     
     @IBAction func joinAChapterButton(_ sender: Any) {
+        if(notFilledOut()){
+            warningLabel.isHidden = false
+        }
+        else{
+            goToNextScreen(segueName: "toPickAChapter")
+        }
     }
     
     @IBAction func becomeAMemberButton(_ sender: Any) {
+        if(notFilledOut()){
+            warningLabel.isHidden = false
+        }
+        else{
+            goToNextScreen(segueName: "toBecomeAMember")
+        }
     }
     
     @IBAction func justLearnMoreButton(_ sender: Any) {
+        if(notFilledOut()){
+            warningLabel.isHidden = false
+        }
+        else{
+            goToNextScreen(segueName: "toConferenceInterest")
+        }
     }
     func signInAnonymously(){
         Auth.auth().signInAnonymously { (user, error) in
@@ -96,8 +114,7 @@ extension ViewController: UITextFieldDelegate{
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if(emailTextField.isFirstResponder){
-            print("going to next screen")
-            goToNextScreen()
+            print("do nothing")
             return true
         }
         else{

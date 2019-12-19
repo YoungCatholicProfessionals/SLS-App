@@ -19,6 +19,9 @@
 		D0150888239AB081009989D6 /* SLS20UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0150887239AB081009989D6 /* SLS20UITests.swift */; };
 		D0150896239AB114009989D6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D0150895239AB114009989D6 /* GoogleService-Info.plist */; };
 		D0150898239ACE3D009989D6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0150897239ACE3D009989D6 /* User.swift */; };
+		D023A71323ABD6AE00D0D23F /* ConferenceInterestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D023A71223ABD6AE00D0D23F /* ConferenceInterestViewController.swift */; };
+		D023A71523ABE20A00D0D23F /* JoinAChapterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D023A71423ABE20A00D0D23F /* JoinAChapterViewController.swift */; };
+		D023A71723ABE8FF00D0D23F /* BecomeAMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D023A71623ABE8FF00D0D23F /* BecomeAMemberViewController.swift */; };
 		D0BCAC5523A1353B00816850 /* StartAChapterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BCAC5423A1353B00816850 /* StartAChapterViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +66,9 @@
 		D0150889239AB081009989D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0150895239AB114009989D6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D0150897239ACE3D009989D6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		D023A71223ABD6AE00D0D23F /* ConferenceInterestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceInterestViewController.swift; sourceTree = "<group>"; };
+		D023A71423ABE20A00D0D23F /* JoinAChapterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinAChapterViewController.swift; sourceTree = "<group>"; };
+		D023A71623ABE8FF00D0D23F /* BecomeAMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BecomeAMemberViewController.swift; sourceTree = "<group>"; };
 		D0BCAC5423A1353B00816850 /* StartAChapterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartAChapterViewController.swift; sourceTree = "<group>"; };
 		D727F26B035E576DF3CB0794 /* Pods_SLS20Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SLS20Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -152,6 +158,9 @@
 				D0150895239AB114009989D6 /* GoogleService-Info.plist */,
 				D0150897239ACE3D009989D6 /* User.swift */,
 				D0BCAC5423A1353B00816850 /* StartAChapterViewController.swift */,
+				D023A71223ABD6AE00D0D23F /* ConferenceInterestViewController.swift */,
+				D023A71423ABE20A00D0D23F /* JoinAChapterViewController.swift */,
+				D023A71623ABE8FF00D0D23F /* BecomeAMemberViewController.swift */,
 			);
 			path = SLS20;
 			sourceTree = "<group>";
@@ -474,10 +483,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D023A71523ABE20A00D0D23F /* JoinAChapterViewController.swift in Sources */,
+				D023A71723ABE8FF00D0D23F /* BecomeAMemberViewController.swift in Sources */,
 				D015086A239AB081009989D6 /* ViewController.swift in Sources */,
 				D0150868239AB081009989D6 /* AppDelegate.swift in Sources */,
 				D0150898239ACE3D009989D6 /* User.swift in Sources */,
 				D0BCAC5523A1353B00816850 /* StartAChapterViewController.swift in Sources */,
+				D023A71323ABD6AE00D0D23F /* ConferenceInterestViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
